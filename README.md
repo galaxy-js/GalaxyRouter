@@ -5,7 +5,7 @@
 ## Installation and usage
 
 ```js
-import { GalaxyRouter, RouterViewDirective, RouterLinkDirective } from ''
+import { GalaxyRouter, RouterViewDirective, RouterLinkDirective } from 'https://cdn.jsdelivr.net/gh/aeroxmotion/GalaxyRouter/src/index.js'
 
 Galaxy.setup({
   directives: [

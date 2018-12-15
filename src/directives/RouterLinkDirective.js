@@ -13,8 +13,6 @@ export default class RouterLinkDirective extends GalaxyDirective {
   }
 
   init () {
-    console.log('THis element', this.$element)
-
     this.router = this.$scope.$router
 
     // Detect click
