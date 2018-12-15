@@ -7,26 +7,6 @@
 ```js
 import { GalaxyRouter, RouterViewDirective, RouterLinkDirective } from 'https://cdn.jsdelivr.net/gh/aeroxmotion/GalaxyRouter/src/index.js'
 
-Galaxy.setup({
-  directives: [
-    RouterViewDirective,
-    RouterLinkDirective,
-    // ...
-  ],
-  plugins: {
-    $router: new GalaxyRouter([
-
-      /**
-       * Route elements must have `is` property
-       */
-      { name: '/home', element: HomeElement },
-      { name: '/about', element: AboutElement }
-    ])
-  }
-})
-```
-
-```js
 class RootElement extends GalaxyElement {
   static get template () {
     return html`
@@ -45,6 +25,26 @@ class RootElement extends GalaxyElement {
     this.$router // <- Injected router instance
   }
 }
+
+Galaxy.setup({
+  root: RootElement,
+
+  directives: [
+    RouterViewDirective,
+    RouterLinkDirective,
+    // ...
+  ],
+  plugins: {
+    $router: new GalaxyRouter([
+
+      /**
+       * Route elements must have `is` property
+       */
+      { name: '/home', element: HomeElement },
+      { name: '/about', element: AboutElement }
+    ])
+  }
+})
 ```
 
 ## Working example
