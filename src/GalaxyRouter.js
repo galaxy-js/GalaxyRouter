@@ -62,9 +62,7 @@ export default class GalaxyRouter extends EventTarget {
   }
 
   _detectRouteChanges () {
-    const routeChange = this._onRouteChange.bind(this)
-
-    window.addEventListener('popstate', routeChange)
-    window.addEventListener('load', routeChange)
+    window.addEventListener('popstate', this._onRouteChange.bind(this))
+    this._onRouteChange()
   }
 }
