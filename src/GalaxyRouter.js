@@ -1,4 +1,5 @@
 import GalaxyRoute from './GalaxyRoute.js'
+import RouterEvent from './RouterEvent.js'
 
 export default class GalaxyRouter extends EventTarget {
 
@@ -51,11 +52,9 @@ export default class GalaxyRouter extends EventTarget {
 
     if (this.active !== previous) {
       this.dispatchEvent(
-        new CustomEvent('routeChange', {
-          detail: {
-            actual: this.active,
-            previous
-          }
+        new RouterEvent('routeChange', {
+          actual: this.active,
+          previous
         })
       )
     }
