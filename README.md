@@ -40,8 +40,8 @@ Galaxy.setup({
       /**
        * Route elements must have `is` property
        */
-      { name: '/home', element: HomeElement },
-      { name: '/about', element: AboutElement }
+      { path: '/home', element: HomeElement },
+      { path: '/about', element: AboutElement }
     ])
   }
 })
