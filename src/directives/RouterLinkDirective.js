@@ -24,6 +24,6 @@ export default class RouterLinkDirective extends GalaxyDirective {
     // Prevent redirection
     event.preventDefault()
 
-    this.router.push(this.$element.href)
+    this.router.push(this.$element.pathname)
   }
 }

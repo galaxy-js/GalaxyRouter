@@ -35,8 +35,10 @@ export default class GalaxyRouter extends EventTarget {
   }
 
   _changeRoute (mode, path) {
-    window.history[`${mode}State`]({}, document.title, path)
-    this._onRouteChange()
+    if (!this.url || this.url.pathname !== path) {
+      window.history[`${mode}State`]({}, document.title, path)
+      this._onRouteChange()
+    }
   }
 
   _onRouteChange () {
