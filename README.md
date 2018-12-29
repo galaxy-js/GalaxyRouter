@@ -5,7 +5,7 @@
 ## Installation and usage
 
 ```js
-import { GalaxyRouter, RouterViewDirective, RouterLinkDirective } from 'https://cdn.jsdelivr.net/gh/aeroxmotion/GalaxyRouter/src/index.js'
+import GalaxyRouterPlugin from 'https://cdn.jsdelivr.net/gh/aeroxmotion/GalaxyRouter/src/index.js'
 
 class RootElement extends GalaxyElement {
   static get template () {
@@ -28,22 +28,18 @@ class RootElement extends GalaxyElement {
 
 Galaxy.setup({
   root: RootElement,
+  plugins: [
+    GalaxyRouterPlugin.with({
+      routes: [
 
-  directives: [
-    RouterViewDirective,
-    RouterLinkDirective,
-    // ...
-  ],
-  plugins: {
-    $router: new GalaxyRouter([
-
-      /**
-       * Route elements must have `is` property
-       */
-      { path: '/home', element: HomeElement },
-      { path: '/about', element: AboutElement }
-    ])
-  }
+        /**
+         * Route elements must have `is` property
+         */
+        { path: '/home', element: HomeElement },
+        { path: '/about', element: AboutElement }
+      ]
+    })
+  ]
 })
 ```
 

@@ -1,11 +1,28 @@
-/**
- * Export main directives
- */
-export { default as RouterLinkDirective } from './directives/RouterLinkDirective.js'
-export { default as RouterViewDirective } from './directives/RouterViewDirective.js'
+import { GalaxyPlugin } from 'https://cdn.jsdelivr.net/gh/LosMaquios/GalaxyJS/dist/galaxy.esm.js'
+
+import GalaxyRouter from './GalaxyRouter.js'
+
+import RouterLinkDirective from './directives/RouterLinkDirective.js'
+import RouterViewDirective from './directives/RouterViewDirective.js'
 
 /**
- * Export main classes
+ * Export classes
  */
+export { GalaxyRouter, RouterLinkDirective, RouterViewDirective }
 export { default as GalaxyRoute } from './GalaxyRoute.js'
-export { default as GalaxyRouter } from './GalaxyRouter.js'
+
+/**
+ * Export plugin
+ */
+export default class GalaxyRouterPlugin extends GalaxyPlugin {
+  static init ({ directives }) {
+    this.$router = new GalaxyRouter(this.$options.routes)
+
+    // Install directives
+    directives.push(RouterLinkDirective, RouterViewDirective)
+  }
+
+  static install (GalaxyElement) {
+    GalaxyElement.prototype.$router = this.$router
+  }
+}

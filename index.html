@@ -9,7 +9,7 @@
 
     <script type="module">
       import { setup, html, GalaxyElement } from 'https://cdn.jsdelivr.net/gh/LosMaquios/GalaxyJS/dist/galaxy.esm.js'
-      import { GalaxyRouter, RouterLinkDirective, RouterViewDirective } from './src/index.js'
+      import GalaxyRouterPlugin from './src/index.js'
 
       class RouterApp extends GalaxyElement {
         static get template () {
@@ -59,17 +59,14 @@
 
       setup({
         root: RouterApp,
-
-        directives: [
-          RouterLinkDirective,
-          RouterViewDirective
-        ],
-        plugins: {
-          $router: new GalaxyRouter([
-            { path: '/home', element: HomeElement },
-            { path: '/about', element: AboutElement }
-          ])
-        }
+        plugins: [
+          GalaxyRouterPlugin.with({
+            routes: [
+              { path: '/home', element: HomeElement },
+              { path: '/about', element: AboutElement }
+            ]
+          })
+        ]
       })
     </script>
   </body>
