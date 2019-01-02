@@ -16,7 +16,6 @@ export default class RouterViewDirective extends GalaxyDirective {
     this.router = this.$scope.$router
 
     this.router.addEventListener('routeChange', this._changeView.bind(this))
-    this._changeView()
   }
 
   _changeView () {

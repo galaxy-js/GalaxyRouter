@@ -15,11 +15,26 @@ export { default as GalaxyRoute } from './GalaxyRoute.js'
  * Export plugin
  */
 export default class GalaxyRouterPlugin extends GalaxyPlugin {
-  static init ({ directives }) {
-    this.$router = new GalaxyRouter(this.$options.routes)
+  static init ({ elements, directives }) {
+    const { routes } = this.$options
+
+    this.$router = new GalaxyRouter(routes)
+
+    const registrations = []
+
+    // Install route elements
+    routes.forEach(({ element }) => {
+      elements.push(element)
+      registrations.push(window.customElements.whenDefined(element.is))
+    })
 
     // Install directives
     directives.push(RouterLinkDirective, RouterViewDirective)
+
+    // Start router after elements registration
+    Promise
+      .all(registrations)
+      .then(() => { this.$router.start() })
   }
 
   static install (GalaxyElement) {

@@ -31,10 +31,6 @@ Galaxy.setup({
   plugins: [
     GalaxyRouterPlugin.with({
       routes: [
-
-        /**
-         * Route elements must have `is` property
-         */
         { path: '/home', element: HomeElement },
         { path: '/about', element: AboutElement }
       ]

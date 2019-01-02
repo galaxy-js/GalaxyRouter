@@ -29,15 +29,12 @@
 
         routes = [
           '/home',
-          '/about'
+          '/about',
+          `/user/${Math.floor(Math.random() * 100)}`
         ]
       }
 
       class HomeElement extends GalaxyElement {
-        static get is () {
-          return 'home-element'
-        }
-
         static get template () {
           return html`
             <h2>In home!!!</h2>
@@ -46,13 +43,17 @@
       }
 
       class AboutElement extends GalaxyElement {
-        static get is () {
-          return 'about-element'
-        }
-
         static get template () {
           return html`
             <h2>In about!!!</h2>
+          `
+        }
+      }
+
+      class UserElement extends GalaxyElement {
+        static get template () {
+          return html`
+            <h2>User with: {{ $router.active.params.id }}</h2>
           `
         }
       }
@@ -63,7 +64,8 @@
           GalaxyRouterPlugin.with({
             routes: [
               { path: '/home', element: HomeElement },
-              { path: '/about', element: AboutElement }
+              { path: '/about', element: AboutElement },
+              { path: '/user/:id', element: UserElement }
             ]
           })
         ]

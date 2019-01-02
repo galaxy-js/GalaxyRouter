@@ -17,13 +17,19 @@ export default class GalaxyRouter extends EventTarget {
    */
   url = null
 
+  /**
+   * Router started?
+   *
+   * @type {boolean}
+   */
+  get started () {
+    return !!this.__bindRouteChange
+  }
+
   constructor (routes) {
     super()
 
     this.routes = routes.map(route => new GalaxyRoute(route))
-
-    // Init route change detection
-    this._detectRouteChanges()
   }
 
   push (path) {
@@ -62,8 +68,19 @@ export default class GalaxyRouter extends EventTarget {
     }
   }
 
-  _detectRouteChanges () {
-    window.addEventListener('popstate', this._onRouteChange.bind(this))
+  start () {
+    if (this.started) return
+
+    this.__bindRouteChange = this._onRouteChange.bind(this)
+
+    window.addEventListener('popstate', this.__bindRouteChange)
     this._onRouteChange()
+  }
+
+  stop () {
+    if (this.started) {
+      window.removeEventListener('popstate', this.__bindRouteChange)
+      this.__bindRouteChange = null
+    }
   }
 }
